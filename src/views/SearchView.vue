@@ -1,0 +1,198 @@
+<template>
+  <section class="mb-12 mt-32">
+    <loading-bar
+      :barWidth="barWidth"
+      :isVisibleLoadingBar="isVisibleLoadingBar"
+    />
+    <div class="container mx-auto px-20 mb-10">
+      <h2 class="text-3xl text-center">Anime Search Engine</h2>
+      <div class="mt-12">
+        <anime-filter
+          :animeGenres="animeGenres"
+          :sortBy="sortBy"
+          :selectedSortBy="selectedSortBy"
+          v-model:filter="filter"
+          v-model:selectGenreId="selectGenreId"
+          v-model:selectedSortBy="selectedSortBy"
+          @find-anime="findAnime"
+          @selectedGenre="findAnime"
+          @reset="reset"
+        />
+        <div>
+          <h2 class="text-3xl">All anime</h2>
+          <div class="mt-5 mb-10 grid grid-cols-6 gap-8 self-start">
+            <anime-item
+              v-for="anime in searchAnimeList"
+              :key="anime.mal_id"
+              :anime="anime"
+            />
+          </div>
+          <div
+            v-show="searchAnimeList.length > 0"
+            ref="observeSearchAnime"
+            class="observer"
+          ></div>
+        </div>
+        <h2 v-if="notFound" class="text-3xl">Not Found...</h2>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import AnimeFilter from "@/components/AnimeFilter.vue";
+import AnimeItem from "@/components/AnimeItem.vue";
+import LoadingBar from "@/components/UI/LoadingBar.vue";
+import { getAnimeList } from "@/components/api";
+export default {
+  components: {
+    AnimeFilter,
+    AnimeItem,
+    LoadingBar,
+  },
+  created() {
+    const windowData = Object.fromEntries([
+      ...new URL(window.location).searchParams.entries(),
+    ]);
+    if (windowData.filter) {
+      this.filter = windowData.filter;
+    }
+    if (windowData.genreid) {
+      this.selectGenreId = windowData.genreid;
+    }
+
+    if (windowData.selectedSortBy) {
+      this.selectedSortBy = windowData.selectedSortBy;
+    }
+
+    let getResponce = getAnimeList("https://api.jikan.moe/v4/genres/anime");
+    getResponce.then((data) => {
+      this.animeGenres = data;
+    });
+    let getTopAnime = getAnimeList(
+      `https://api.jikan.moe/v4/anime?q=${this.filter}&genres=${this.selectGenreId}&order_by=${this.selectedSortBy}&sort=desc`
+    );
+    getTopAnime
+      .then((data) => {
+        this.isVisibleLoadingBar = true;
+        for (let i = 0; i < 100; i++) {
+          if (this.barWidth !== 100) {
+            this.barWidth += 1;
+          }
+        }
+        this.searchAnimeList = data;
+      })
+      .finally(() => {
+        setTimeout(() => {
+          this.isVisibleLoadingBar = false;
+        }, 300);
+      });
+  },
+  mounted() {
+    const observeSearchList = () => {
+      let options = {
+        rootMargin: "0px",
+        threshold: 1.0,
+      };
+      const callback = (entries) => {
+        if (entries[0].isIntersecting) {
+          this.loadMoreSearchAnime();
+        }
+      };
+      let observer = new IntersectionObserver(callback, options);
+      observer.observe(this.$refs.observeSearchAnime);
+    };
+    observeSearchList();
+  },
+  data() {
+    return {
+      filter: "",
+      animeGenres: [],
+      sortBy: ["Favorites", "Score"],
+      barWidth: 0,
+      isVisibleLoadingBar: false,
+      searchAnimeList: [],
+      selectGenreId: "",
+      selectedSortBy: "",
+      notFound: false,
+      searchAnimePage: 1,
+      lastScrollTop: 0,
+    };
+  },
+  computed: {
+    pageStateOptions() {
+      return {
+        filter: this.filter,
+        selectGenreId: this.selectGenreId,
+        selectedSortBy: this.selectedSortBy,
+      };
+    },
+  },
+  methods: {
+    reset(input) {
+      this[input] = "";
+    },
+    loadMoreSearchAnime() {
+      this.searchAnimePage++;
+      let getTopAnime = getAnimeList(
+        `https://api.jikan.moe/v4/anime?q=${this.filter}&genres=${this.selectGenreId}&order_by=${this.selectedSortBy}&page=${this.searchAnimePage}&sort=desc`
+      );
+      getTopAnime
+        .then((data) => {
+          this.isVisibleLoadingBar = true;
+          for (let i = 0; i < 100; i++) {
+            if (this.barWidth !== 100) {
+              this.barWidth += 1;
+            }
+          }
+          this.searchAnimeList = [...this.searchAnimeList, ...data];
+        })
+        .finally(() => {
+          setTimeout(() => {
+            this.isVisibleLoadingBar = false;
+          }, 300);
+        });
+    },
+
+    findAnime() {
+      this.searchAnimePage = 1;
+      let getTopAnime = getAnimeList(
+        `https://api.jikan.moe/v4/anime?q=${this.filter}&genres=${this.selectGenreId}&order_by=${this.selectedSortBy}&sort=desc`
+      );
+      getTopAnime
+        .then((data) => {
+          this.isVisibleLoadingBar = true;
+          for (let i = 0; i < 100; i++) {
+            if (this.barWidth == 100) {
+              break;
+            }
+            this.barWidth += 1;
+          }
+          this.searchAnimeList = data;
+          if (this.searchAnimeList.length === 0) {
+            this.notFound = true;
+          }
+        })
+        .finally(() => {
+          setTimeout(() => {
+            this.isVisibleLoadingBar = false;
+          }, 300);
+        });
+    },
+  },
+  watch: {
+    pageStateOptions(value) {
+      history.pushState(
+        history.state,
+        document.title,
+        `${window.location.pathname}?filter=${value.filter}&genreid=${value.selectGenreId}&selectedSortBy=${value.selectedSortBy}`
+      );
+    },
+  },
+};
+</script>
+<style lang="scss" scoped>
+.observer {
+  width: 100%;
+}
+</style>
