@@ -59,18 +59,18 @@ export default {
     LoadingBar,
   },
   created() {
-    // const windowData = Object.fromEntries([
-    //   ...new URL(window.location).searchParams.entries(),
-    // ]);
-    // if (windowData.filter) {
-    //   this.filter = windowData.filter;
-    // }
-    // if (windowData.genreid) {
-    //   this.selectGenreId = windowData.genreid;
-    // }
-    // if (windowData.selectedSortBy) {
-    //   this.selectedSortBy = windowData.selectedSortBy;
-    // }
+    const windowData = Object.fromEntries([
+      ...new URL(window.location).searchParams.entries(),
+    ]);
+    if (windowData.filter) {
+      this.filter = windowData.filter;
+    }
+    if (windowData.genreid) {
+      this.selectGenreId = windowData.genreid;
+    }
+    if (windowData.selectedSortBy) {
+      this.selectedSortBy = windowData.selectedSortBy;
+    }
     this.loadAnime();
     this.loadAnimeGenres();
   },
@@ -119,7 +119,7 @@ export default {
       let getResponce = getAnimeList("https://api.jikan.moe/v4/genres/anime");
       getResponce.then((data) => {
         if (!data) {
-          loadAnimeGenres();
+          this.loadAnimeGenres();
         } else {
           this.animeGenres = data;
         }
@@ -206,8 +206,9 @@ export default {
       history.pushState(
         history.state,
         document.title,
-        `${window.location.pathname}?filter=${value.filter}&genreid=${value.selectGenreId}&selectedSortBy=${value.selectedSortBy}`
+        `${window.location.pathname}#/?filter=${value.filter}&genreid=${value.selectGenreId}&selectedSortBy=${value.selectedSortBy}`
       );
+      console.log(window.location);
     },
   },
 };
