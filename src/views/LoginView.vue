@@ -32,6 +32,7 @@
     </div>
   </div>
 </template>
+
 <style lang="scss" scoped>
 input {
   color: rgb(92, 114, 138);

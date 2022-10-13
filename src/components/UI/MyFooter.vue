@@ -1,10 +1,10 @@
 <template>
   <section class="footer-bg px-14 py-10">
-    <div class="container mx-auto px-24">
-      <div class="grid grid-cols-[auto,800px] text-[#a0b1c5]">
-        <div>
+    <div class="container mx-auto lg:px-24">
+      <div class="grid 2xl:grid-cols-[auto,800px] mt-0 text-[#a0b1c5]">
+        <div class="2xl:text-left text-center">
           <h2 class="text-[#3db4f2]">Site Theme</h2>
-          <div class="flex mr-3">
+          <div class="flex gap-2 2xl:justify-start justify-center">
             <div class="theme-icon-default flex items-center justify-center">
               A
             </div>
@@ -13,7 +13,9 @@
             </div>
           </div>
         </div>
-        <div class="flex justify-between links-pd list-mg">
+        <div
+          class="grid lg:grid-cols-4 sm:grid-cols-2 smm:grid-cols-1 lg:justify-between 2xl:mt-0 mt-6 links-pd list-mg text-center 2xl:text-left justify-center"
+        >
           <div>
             <ul>
               <li>
@@ -105,7 +107,6 @@
   cursor: pointer;
   font-weight: 500;
   height: 25px;
-  margin-right: 10px;
   width: 25px;
   background: #fff;
   color: #000;
@@ -116,7 +117,6 @@
   cursor: pointer;
   font-weight: 500;
   height: 25px;
-  margin-right: 10px;
   width: 25px;
 }
 </style>

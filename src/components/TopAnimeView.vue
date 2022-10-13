@@ -1,10 +1,10 @@
 <template>
-  <div class="container mx-auto px-20 mb-10">
+  <div class="container mx-auto lg:px-20 px-5 mb-10" v-if="animeList">
     <router-link to="/top" class="flex justify-between">
       <h3 class="text-xl">TOP 100 ANIME</h3>
       <p>View All</p>
     </router-link>
-    <ul class="mt-5">
+    <ul class="mt-5 xl:block hidden">
       <li class="mb-5" v-for="anime in animeList" :key="anime.mal_id">
         <div class="grid grid-cols-[70px,_auto] items-center">
           <div class="text-center text-3xl">
@@ -19,13 +19,14 @@
                 :to="`anime/${anime.mal_id}/${normalUrlTitle(anime.title)}`"
               >
                 <img
+                  class="max-h-[107px]"
                   :src="anime.images.jpg.image_url"
                   :alt="anime.title_english"
                 />
               </router-link>
             </div>
             <div
-              class="px-5 py-2 grid justify-between items-center grid-cols-[1fr,_500px]"
+              class="px-5 py-2 grid justify-between items-center grid-cols-[auto,auto]"
             >
               <div>
                 <div class="mb-3">
@@ -35,15 +36,16 @@
                     <p>{{ anime.title_english }}</p>
                   </router-link>
                 </div>
-                <router-link
-                  to="search/genre/:genre"
-                  class="mr-5 py-1 px-3 rounded-full"
+                <a
+                  href=""
+                  @click.prevent="selectedGenre(genres.mal_id)"
+                  class="xl:mr-5 mr-2 py-1 px-3 rounded-full"
                   v-for="genres in anime.genres"
                   :key="genres.mal_id"
-                  :class="`${getRandomColor(0, 11)}-100`"
+                  :class="`${getRandomColor(0, 8)}-100`"
                 >
                   {{ genres.name }}
-                </router-link>
+                </a>
               </div>
               <div class="grid grid-cols-3">
                 <div class="text-center left">
@@ -68,28 +70,36 @@
         </div>
       </li>
     </ul>
+    <div
+      class="xl:hidden mb-10 mt-5 grid md:grid-cols-3 sm:grid-cols-2 justify-center gap-8 self-start"
+    >
+      <anime-item
+        v-for="anime in animeList"
+        :key="anime.mal_id"
+        :anime="anime"
+        :topNumber="anime.popularity"
+        :color="getRandomColor(0, 8)"
+      />
+    </div>
   </div>
 </template>
 <script>
+import AnimeItem from "@/components/AnimeItem.vue";
 export default {
+  components: {
+    AnimeItem,
+  },
   created() {
-    fetch(`https://api.jikan.moe/v4/top/anime?filter=bypopularity`)
-      .then((response) => response.json())
-      .then((data) => {
-        this.animeList = data.data;
-      });
+    this.getTopAnime();
   },
   data() {
     return {
-      animeList: [],
+      animeList: null,
       colors: [
         "red",
         "orange",
         "amber",
         "blue",
-        "emerald",
-        "teal",
-        "cyan",
         "sky",
         "indigo",
         "violet",
@@ -99,9 +109,21 @@ export default {
     };
   },
   mounted() {
-    this.getRandomColor(0, 11);
+    this.getRandomColor(0, 8);
   },
   methods: {
+    getTopAnime() {
+      fetch(`https://api.jikan.moe/v4/top/anime?filter=bypopularity`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data) {
+            this.getTopAnime();
+            return;
+          } else {
+            this.animeList = data.data;
+          }
+        });
+    },
     getRandomColor(min, max) {
       min = Math.ceil(min);
       max = Math.floor(max);
@@ -126,15 +148,6 @@ export default {
 .blue-100 {
   background-color: rgb(219 234 254);
 }
-.emerald-100 {
-  background-color: rgb(209 250 229);
-}
-.teal-100 {
-  background-color: rgb(204 251 241);
-}
-.cyan-100 {
-  background-color: rgb(207 250 254);
-}
 .indigo-100 {
   background-color: rgb(224 231 255);
 }
@@ -143,9 +156,6 @@ export default {
 }
 .pink-100 {
   background-color: rgb(252 231 243);
-}
-.slate-100 {
-  background-color: rgb(241 245 249);
 }
 .rose-100 {
   background-color: rgb(255 228 230);

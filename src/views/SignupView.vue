@@ -4,26 +4,30 @@
       class="my-16 py-20 px-10 text-center max-w-[400px] bg-slate-50 mx-auto rounded"
     >
       <h2 class="text-2xl mb-10">Sign up to AniList</h2>
-      <form>
+      <form @submit.prevent="signupRequest">
         <input
           class="w-full border-0 py-2 px-2 mb-6 rounded"
           type="text"
           placeholder="Email"
+          v-model="user.email"
         />
         <input
           class="w-full border-0 px-2 py-2 mb-6 rounded"
           type="text"
           placeholder="Username"
+          v-model="user.username"
         />
         <input
           class="w-full border-0 px-2 py-2 mb-6 rounded"
           type="password"
           placeholder="Password"
+          v-model="user.password"
         />
         <input
           class="w-full border-0 px-2 py-2 mb-6 rounded"
           type="password"
           placeholder="Confirm Password"
+          v-model="user.confirmPassword"
         />
         <div class="flex justify-center gap-2 items-center">
           <input @click="isChecked = !isChecked" type="checkbox" />
@@ -59,8 +63,18 @@ export default {
   data() {
     return {
       isChecked: false,
+      user: {
+        email: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+        xhrRequest: false,
+        errorMessage: "",
+        successMessage: "",
+      },
     };
   },
+  methods: {},
 };
 </script>
 <style lang="scss" scoped>

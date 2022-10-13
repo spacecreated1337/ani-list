@@ -1,8 +1,8 @@
 <template>
   <div>
     <form @submit.prevent="">
-      <div class="flex justify-between mt-10 mb-5">
-        <div class="basis-1/4">
+      <div class="md:grid grid-cols-3 gap-5 mt-10 mb-5">
+        <div class="basis-1/4 mb-3">
           <div class="relative">
             <input
               :value="filter"
@@ -17,7 +17,7 @@
             ></i>
           </div>
         </div>
-        <div class="basis-1/4">
+        <div class="basis-1/4 mb-3">
           <div class="relative">
             <select
               :value="selectGenreId"
@@ -40,7 +40,7 @@
             ></i>
           </div>
         </div>
-        <div class="basis-1/4">
+        <div class="basis-1/4 mb-3">
           <div class="relative">
             <select
               :value="getSelectedSortBy"

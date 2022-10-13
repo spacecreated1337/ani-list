@@ -1,18 +1,18 @@
 <template>
-  <div class="container mx-auto sm:px-60 mt-32 mb-16">
-    <div class="bene-bg rounded-3xl p-16 relative">
+  <div class="lg:container lg:mx-auto 2xl:px-60 mx-0 xl:mt-32 mt-20 mb-16">
+    <div class="bene-bg lg:rounded-3xl sm:p-16 p-5 relative">
       <div class="text-center">
         <h1 class="text-4xl mb-5 bene-title">
           The next-generation anime platform
         </h1>
-        <h2 class="text-xl w-2/5 mx-auto bene-subtitle">
+        <h2 class="text-xl lg:w-2/5 mx-auto bene-subtitle">
           Track, share, and discover your favorite anime and manga with AniList.
         </h2>
       </div>
       <div
-        class="grid grid-benefits justify-center gap-16 my-20 items-baseline"
+        class="grid lg:grid-benefits grid-cols-1 justify-center sm:gap-16 gap-12 sm:my-20 my-10 items-baseline"
       >
-        <div class="flex items-center gap-10">
+        <div class="flex items-center gap-3 sm:gap-10">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,14 +68,16 @@
             </svg>
           </div>
           <div>
-            <h3 class="bene-title text-lg mb-3">Discover your obsessions</h3>
-            <p class="bene-subtitle text-sm">
+            <h3 class="bene-title smm:text-lg mb-3">
+              Discover your obsessions
+            </h3>
+            <p class="bene-subtitle smm:text-sm">
               What are your highest rated genres or most watched voice actors?
               Follow your watching habits over time with in-depth statistics.
             </p>
           </div>
         </div>
-        <div class="flex items-center gap-10">
+        <div class="flex items-center gap-3 sm:gap-10">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -127,14 +129,14 @@
             </svg>
           </div>
           <div>
-            <h3 class="bene-title text-lg mb-3">Bring AniList anywhere</h3>
-            <p class="bene-subtitle text-sm">
+            <h3 class="bene-title smm:text-lg mb-3">Bring AniList anywhere</h3>
+            <p class="bene-subtitle smm:text-sm">
               Keep track of your progress on-the-go with one of many AniList
               apps across iOS, Android, macOS, and Windows.
             </p>
           </div>
         </div>
-        <div class="flex items-center gap-10">
+        <div class="flex items-center gap-3 sm:gap-10">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -244,14 +246,14 @@
             </svg>
           </div>
           <div>
-            <h3 class="bene-title text-lg mb-3">Join the conversation</h3>
-            <p class="bene-subtitle text-sm">
+            <h3 class="bene-title smm:text-lg mb-3">Join the conversation</h3>
+            <p class="bene-subtitle smm:text-sm">
               Share your thoughts with our thriving community, make friends,
               socialize, and receive recommendations.
             </p>
           </div>
         </div>
-        <div class="flex items-center gap-10">
+        <div class="flex items-center gap-3 sm:gap-10">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -295,8 +297,8 @@
             </svg>
           </div>
           <div>
-            <h3 class="bene-title text-lg mb-3">Tweak it to your liking</h3>
-            <p class="bene-subtitle text-sm">
+            <h3 class="bene-title smm:text-lg mb-3">Tweak it to your liking</h3>
+            <p class="bene-subtitle smm:text-sm">
               Customize your scoring system, title format, color scheme, and
               much more! Also, we have a dark mode.
             </p>
