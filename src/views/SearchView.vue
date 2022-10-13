@@ -204,9 +204,9 @@ export default {
   watch: {
     pageStateOptions(value) {
       history.pushState(
-        history.state,
+        null,
         document.title,
-        `${window.location.pathname}#/?filter=${value.filter}&genreid=${value.selectGenreId}&selectedSortBy=${value.selectedSortBy}`
+        `${window.location.pathname}?filter=${value.filter}&genreid=${value.selectGenreId}&selectedSortBy=${value.selectedSortBy}`
       );
       console.log(window.location);
     },
