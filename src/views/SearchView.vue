@@ -59,17 +59,17 @@ export default {
     LoadingBar,
   },
   created() {
-    const windowData = Object.fromEntries([
-      ...new URL(window.location).searchParams.entries(),
-    ]);
-    if (windowData.filter) {
-      this.filter = windowData.filter;
+    console.log(this.$route.query);
+    const { filter, selectGenreId, selectedSortBy } = this.$route.query;
+    console.log(filter, selectGenreId, selectedSortBy);
+    if (filter) {
+      this.filter = filter;
     }
-    if (windowData.genreid) {
-      this.selectGenreId = windowData.genreid;
+    if (selectGenreId) {
+      this.selectGenreId = selectGenreId;
     }
-    if (windowData.selectedSortBy) {
-      this.selectedSortBy = windowData.selectedSortBy;
+    if (selectedSortBy) {
+      this.selectedSortBy = selectedSortBy;
     }
     this.loadAnime();
     this.loadAnimeGenres();
@@ -104,15 +104,6 @@ export default {
       searchAnimePage: 1,
       lastScrollTop: 0,
     };
-  },
-  computed: {
-    pageStateOptions() {
-      return {
-        filter: this.filter,
-        selectGenreId: this.selectGenreId,
-        selectedSortBy: this.selectedSortBy,
-      };
-    },
   },
   methods: {
     loadAnimeGenres() {
@@ -202,13 +193,20 @@ export default {
     },
   },
   watch: {
-    pageStateOptions(value) {
-      history.pushState(
-        null,
-        document.title,
-        `${window.location.pathname}?filter=${value.filter}&genreid=${value.selectGenreId}&selectedSortBy=${value.selectedSortBy}`
-      );
-      console.log(window.location);
+    filter(value) {
+      this.$router.replace({
+        query: Object.assign({}, this.$route.query, { filter: value }),
+      });
+    },
+    selectGenreId(value) {
+      this.$router.replace({
+        query: Object.assign({}, this.$route.query, { selectGenreId: value }),
+      });
+    },
+    selectedSortBy(value) {
+      this.$router.replace({
+        query: Object.assign({}, this.$route.query, { selectedSortBy: value }),
+      });
     },
   },
 };

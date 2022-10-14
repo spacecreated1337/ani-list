@@ -2,10 +2,10 @@
   <div class="lg:container lg:mx-auto 2xl:px-60 mx-0 xl:mt-32 mt-20 mb-16">
     <div class="bene-bg lg:rounded-3xl sm:p-16 p-5 relative">
       <div class="text-center">
-        <h1 class="text-4xl mb-5 bene-title">
+        <h1 class="smm:text-4xl text-2xl mb-5 bene-title">
           The next-generation anime platform
         </h1>
-        <h2 class="text-xl lg:w-2/5 mx-auto bene-subtitle">
+        <h2 class="smm:text-xl text-base lg:w-2/5 mx-auto bene-subtitle">
           Track, share, and discover your favorite anime and manga with AniList.
         </h2>
       </div>

@@ -26,7 +26,7 @@
               </router-link>
             </div>
             <div
-              class="px-5 py-2 grid justify-between items-center grid-cols-[auto,auto]"
+              class="px-5 py-2 grid justify-between items-center grid-cols-[auto,_400px]"
             >
               <div>
                 <div class="mb-3">
@@ -47,7 +47,7 @@
                   {{ genres.name }}
                 </a>
               </div>
-              <div class="grid grid-cols-3">
+              <div class="grid grid-cols-3 items-center 2xl:items-start">
                 <div class="text-center left">
                   <p class="text-gray-600">{{ anime.score }} / 10</p>
                   <p class="text-gray-600 text-sm">
