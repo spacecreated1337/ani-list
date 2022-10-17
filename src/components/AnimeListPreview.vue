@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto lg:px-20 px-5 mb-10">
     <div v-if="upcomingAnimeList">
-      <router-link to="/trending" class="flex justify-between">
+      <router-link to="/upcoming" class="flex justify-between">
         <h3 class="text-xl">UPCOMING ANIME</h3>
         <p>View All</p>
       </router-link>

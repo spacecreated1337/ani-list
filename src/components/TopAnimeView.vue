@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto lg:px-20 px-5 mb-10" v-if="animeList">
-    <router-link to="/top" class="flex justify-between">
+    <router-link to="/search/bypopularity" class="flex justify-between">
       <h3 class="text-xl">TOP 100 ANIME</h3>
       <p>View All</p>
     </router-link>
@@ -131,6 +131,12 @@ export default {
     },
     normalUrlTitle(animeTitle) {
       return animeTitle.replace(/[^A-Z0-9]+/gi, "-");
+    },
+    selectedGenre(genreId) {
+      this.$router.push({
+        name: "search",
+        query: { selectGenreId: genreId },
+      });
     },
   },
 };

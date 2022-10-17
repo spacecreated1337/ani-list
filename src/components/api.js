@@ -17,3 +17,7 @@ export const getAnimeDetails = (animeId) => {
     return fetch(`https://api.jikan.moe/v4/anime/${animeId}`)
         .then((response) => response.json());
 };
+
+export const getTopAnimeList = (filterBy, page) => {
+    return fetch(`https://api.jikan.moe/v4/top/anime?filter=${filterBy}&page=${page}`).then((responce) => responce.json());
+};
