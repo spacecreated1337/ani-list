@@ -47,7 +47,7 @@
                   {{ genres.name }}
                 </a>
               </div>
-              <div class="grid grid-cols-3 items-center 2xl:items-start">
+              <div class="grid grid-cols-3 items-center">
                 <div class="text-center left">
                   <p class="text-gray-600">{{ anime.score }} / 10</p>
                   <p class="text-gray-600 text-sm">
