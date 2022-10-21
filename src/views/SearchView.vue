@@ -1,9 +1,5 @@
 <template>
   <section class="mb-12 mt-32">
-    <loading-bar
-      :barWidth="barWidth"
-      :isVisibleLoadingBar="isVisibleLoadingBar"
-    />
     <div class="container mx-auto lg:px-20 px-5 mb-10">
       <h2 class="text-3xl text-center">Anime Search Engine</h2>
       <div class="mt-12">
@@ -44,7 +40,6 @@
 <script>
 import AnimeFilter from "@/components/AnimeFilter.vue";
 import AnimeItem from "@/components/AnimeItem.vue";
-import LoadingBar from "@/components/UI/LoadingBar.vue";
 import { getAnimeList } from "@/components/api";
 export default {
   name: "search",
@@ -57,7 +52,6 @@ export default {
   components: {
     AnimeFilter,
     AnimeItem,
-    LoadingBar,
   },
   created() {
     const { filter, selectGenreId, selectedSortBy } = this.$route.query;
@@ -110,10 +104,12 @@ export default {
     loadAnimeGenres() {
       let getResponce = getAnimeList("https://api.jikan.moe/v4/genres/anime");
       getResponce.then((data) => {
+        this.animeGenres = data;
+        this.$store.commit("runLoadingData");
         if (!data) {
           this.loadAnimeGenres();
         } else {
-          this.animeGenres = data;
+          this.$store.commit("stopLoadingData");
         }
       });
     },
@@ -122,11 +118,12 @@ export default {
         `https://api.jikan.moe/v4/anime?q=${this.filter}&genres=${this.selectGenreId}&order_by=${this.selectedSortBy}&sort=desc`
       );
       getTopAnime.then((data) => {
+        this.searchAnimeList = data;
         if (!data) {
           this.loadAnime();
-          return;
+          this.$store.commit("runLoadingData");
         } else {
-          this.searchAnimeList = data;
+          this.$store.commit("stopLoadingData");
         }
       });
     },
@@ -141,7 +138,9 @@ export default {
         `https://api.jikan.moe/v4/anime?q=${this.filter}&genres=${this.selectGenreId}&order_by=${this.selectedSortBy}&page=${this.searchAnimePage}&sort=desc`
       );
       getTopAnime.then((data) => {
+        this.$store.commit("runLoadingData");
         this.searchAnimeList = [...this.searchAnimeList, ...data];
+        this.$store.commit("stopLoadingData");
       });
     },
 
@@ -151,10 +150,12 @@ export default {
         `https://api.jikan.moe/v4/anime?q=${this.filter}&genres=${this.selectGenreId}&order_by=${this.selectedSortBy}&sort=desc`
       );
       getTopAnime.then((data) => {
+        this.$store.commit("runLoadingData");
         this.searchAnimeList = data;
         if (this.searchAnimeList.length === 0) {
           this.notFound = true;
         }
+        this.$store.commit("stopLoadingData");
       });
     },
   },

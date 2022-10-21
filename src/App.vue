@@ -3,6 +3,7 @@
     <my-navbar
       :class="{ 'fixed-navbar': scrollToTop, 'default-navbar': !scrollToTop }"
     />
+    <nprogress-container />
     <router-view />
     <my-footer />
   </div>
@@ -10,10 +11,12 @@
 <script>
 import MyNavbar from "./components/UI/MyNavbar.vue";
 import MyFooter from "./components/UI/MyFooter.vue";
+import NprogressContainer from "vue-nprogress/src/NprogressContainer";
 export default {
   components: {
     MyNavbar,
     MyFooter,
+    NprogressContainer,
   },
   data() {
     return {

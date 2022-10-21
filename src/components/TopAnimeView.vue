@@ -116,13 +116,13 @@ export default {
       fetch(`https://api.jikan.moe/v4/top/anime?filter=bypopularity`)
         .then((response) => response.json())
         .then((data) => {
+          this.animeList = data.data;
           if (!data) {
             this.getTopAnime();
             return;
-          } else {
-            this.animeList = data.data;
           }
-        });
+        })
+        .catch((err) => console.log(err.message));
     },
     getRandomColor(min, max) {
       min = Math.ceil(min);

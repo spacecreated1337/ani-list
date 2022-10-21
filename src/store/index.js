@@ -1,17 +1,17 @@
 import {
   createStore
 } from 'vuex';
-
+import {
+  loadingBarModules
+} from './loadingBarModules';
 export default createStore({
-  state: {
-    user: null,
-  },
+  state: {},
   getters: {
 
   },
   mutations: {},
-  actions: {
-
-  },
-  modules: {}
+  actions: {},
+  modules: {
+    loadingBarModules
+  }
 });

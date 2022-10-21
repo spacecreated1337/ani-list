@@ -10,5 +10,5 @@ module.exports = defineConfig({
     plugins: [new MiniCssExtractPlugin()]
   },
   publicPath: process.env.NODE_ENV === 'production' ?
-      '/ani-list/' : '/',
+    '/ani-list/' : '/',
 });

@@ -43,6 +43,7 @@ export default {
     this.getUpcomingAnimeList();
     this.getFavoriteAnimeList();
   },
+  mounted() {},
   data() {
     return {
       upcomingAnimeList: null,
@@ -54,27 +55,35 @@ export default {
       let getResponce = getAnimeList(
         "https://api.jikan.moe/v4/top/anime?filter=upcoming&limit=12"
       );
-      getResponce.then((data) => {
-        if (!data) {
-          this.getUpcomingAnimeList();
-          return;
-        } else {
+      getResponce
+        .then((data) => {
+          this.$store.commit("runLoadingData");
           this.upcomingAnimeList = data;
-        }
-      });
+          if (!data) {
+            this.getUpcomingAnimeList();
+            return;
+          } else {
+            this.$store.commit("stopLoadingData");
+          }
+        })
+        .catch((err) => console.log(err.message));
     },
     getFavoriteAnimeList() {
       let getResponce = getAnimeList(
         "https://api.jikan.moe/v4/top/anime?filter=favorite&limit=12"
       );
-      getResponce.then((data) => {
-        if (!data) {
-          this.getUpcomingAnimeList();
-          return;
-        } else {
+      getResponce
+        .then((data) => {
+          this.$store.commit("runLoadingData");
           this.favoriteAnimeList = data;
-        }
-      });
+          if (!data) {
+            this.getUpcomingAnimeList();
+            return;
+          } else {
+            this.$store.commit("stopLoadingData");
+          }
+        })
+        .catch((err) => console.log(err.message));
     },
   },
 };
