@@ -45,7 +45,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .fixed-navbar {
-  background: #2b2d42;
+  background: #0f1420;
   position: fixed;
   width: 100%;
   top: 0;
@@ -55,7 +55,7 @@ export default {
 .default-navbar {
   width: 100%;
   transition: 0.8s;
-  top: -64px;
+  top: -100px;
   position: fixed;
   z-index: 10;
 }

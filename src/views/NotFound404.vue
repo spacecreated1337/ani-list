@@ -4,7 +4,7 @@
       <h2 class="text-5xl mb-5 text-gray-500">PAGE NOT FOUND</h2>
       <img
         class="mx-auto mb-10"
-        src="../assets/images/not-found-chibi.jpg"
+        src="images/not-found-chibi.jpg"
         width="250"
         alt=""
       />

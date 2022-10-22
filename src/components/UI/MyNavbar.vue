@@ -41,8 +41,9 @@ export default {};
 </script>
 <style lang="scss" scoped>
 .nav-bg {
-  background: #2b2d42;
+  background: #0f1420;
   transition: 0.5s;
+  box-shadow: 0px 0px 36px 0px #853be6;
 }
 nav {
   a {

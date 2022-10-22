@@ -3,9 +3,9 @@
     class="max-w-xs relative"
     :to="`anime/${anime.mal_id}/${normalUrlTitle}`"
   >
-    <div class="rounded p-1 bg-pink-400 h-80 2xl:h-72">
+    <div class="p-1 h-80 2xl:h-72">
       <img
-        class="h-full w-full"
+        class="h-full w-full rounded-lg"
         :src="anime.images.jpg.image_url"
         :alt="anime.title"
       />
