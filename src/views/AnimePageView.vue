@@ -48,19 +48,25 @@
             class="mt-8 sm:grid 2xl:grid-cols-[15%,1fr] lg:grid-cols-[20%,1fr] relative gap-10"
           >
             <div class="lg:hidden">
-              <div class="flex justify-between items-center sm:block">
+              <div
+                class="smm:flex justify-between flex-col smm:flex-row items-center block sm:block"
+              >
                 <img
-                  class="rounded-lg h-80 sm:w-full"
+                  class="rounded-lg h-80"
                   :src="anime.images.jpg.large_image_url"
                   :alt="anime.title"
                 />
                 <div>
-                  <div
-                    class="bg-[#ff9700] flex-col gap-3 text-center sm:mt-5 mt-0 rounded-2xl px-5 py-5 flex items-center justify-center w-[156px] h-[156px] mx-auto lg:mx-0"
-                  >
-                    <h2 class="text-xl font-bold">SCORE</h2>
-                    <p class="text-4xl font-bold">{{ anime.score }}</p>
-                    <p>{{ anime?.scored_by?.toLocaleString("ru-RU") }} users</p>
+                  <div class="mt-5">
+                    <div
+                      class="bg-[#ff9700] flex-col gap-3 text-center sm:mt-5 rounded-2xl px-5 py-5 flex items-center justify-center w-[156px] h-[156px] mx-auto lg:mx-0"
+                    >
+                      <h2 class="text-xl font-bold">SCORE</h2>
+                      <p class="text-4xl font-bold">{{ anime.score }}</p>
+                      <p>
+                        {{ anime?.scored_by?.toLocaleString("ru-RU") }} users
+                      </p>
+                    </div>
                   </div>
                   <div class="relative col-start-2 block sm:hidden mt-5">
                     <div>
@@ -97,22 +103,22 @@
             </div>
             <div class="relative col-start-2 hidden sm:block">
               <div>
-                <div class="md:flex justify-between items-center">
+                <div class="lg:flex justify-between items-center block">
                   <ul>
-                    <li class="sm:inline mr-3 font-bold">
+                    <li class="sm:inline md:mr-3 font-bold">
                       Ranked: <span class="font-normal">#{{ anime.rank }}</span>
                     </li>
-                    <li class="sm:inline mr-3 font-bold">
+                    <li class="sm:inline md:mr-3 font-bold">
                       Popularity:
                       <span class="font-normal">{{ anime.popularity }}</span>
                     </li>
-                    <li class="sm:inline mr-3 font-bold">
+                    <li class="sm:inline md:mr-3 font-bold">
                       Members:
                       <span class="font-normal">{{ anime.members }}</span>
                     </li>
                   </ul>
                   <h3
-                    class="text-2xl font-bold md:order-first order-last sm:mt-2 text-center sm:text-left"
+                    class="text-2xl font-bold md:order-first order-last sm:mt-0 text-center sm:text-left"
                   >
                     Synopsis
                   </h3>
@@ -190,7 +196,7 @@
           </div>
         </div>
       </div>
-      <div class="container mx-auto">
+      <div class="container mx-auto px-5">
         <div>
           <tabs :anime="anime" />
         </div>
