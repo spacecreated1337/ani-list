@@ -19,6 +19,9 @@
     .joinnow {
         box-shadow: 0 2px 43px rgb(8 150 230 / 60%);
     }
+    .slider-btn:hover {
+        box-shadow: 0 2px 43px rgb(8 150 230 / 60%);
+    }
     .bene-subtitle {
         color: #acd5f2;
     }

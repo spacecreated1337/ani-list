@@ -1,6 +1,6 @@
 <template>
-  <div class="nav-bg flex items-center">
-    <nav class="container h-16 mx-auto md:px-60 px-5 flex items-center">
+  <div class="nav-bg sm:flex items-center">
+    <nav class="sm:container h-16 sm:mx-auto xl:px-60 px-5 flex items-center">
       <router-link to="/">
         <svg
           xmlns="http://www.w3.org/2000/svg"

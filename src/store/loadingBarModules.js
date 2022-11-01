@@ -10,6 +10,7 @@ export const loadingBarModules = {
         runLoadingData() {
             const nprogress = new NProgress();
             nprogress.start();
+
         },
         stopLoadingData() {
             const nprogress = new NProgress();
